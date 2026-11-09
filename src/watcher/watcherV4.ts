@@ -130,10 +130,12 @@ export class WatcherV4 extends WatchProcess {
                 }
             }
 
+            console.log(this.devices);
             // Remove possible duplicate device if it's serial number eventually got resolved
             const noSerial = 'NOSERIALNUMBER';
             const noSerialDevice = this.devices.get(noSerial);
-            if (noSerialDevice && [...this.devices.values()].some(x => x.handle !== noSerial && x.name === noSerialDevice.name)) {
+            if (noSerialDevice && [...this.devices.values()].some(x => x.handle !== noSerial && x.name === noSerialDevice.name && x.isConnected == true)) {
+                console.log(`deleting device ${noSerial} `);
                 this.devices.delete(noSerial);
             }
 
